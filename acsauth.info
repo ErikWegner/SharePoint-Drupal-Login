@@ -1,0 +1,4 @@
+name = Azure Access Control Service Authentication
+description = Allow users to connect with SharePoint Online and query information.
+core = 7.x
+configure = admin/config/people/acsauth

@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function acsauth_menu() {
+  $items['acsauth/%'] = array(
+    'title' => 'ACS connect',
+    'page callback' => 'acsauth_action_page',
+    'page arguments' => array(
+      1
+    ),
+    'access callback' => TRUE,
+    'file' => 'includes/acsauth.acsauth.inc',
+    'type' => MENU_CALLBACK
+  );
+  $items['admin/config/people/acsauth'] = array(
+    'title' => t('ACS Auth settings'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array(
+      'acsauth_settings_form'
+    ),
+    'access arguments' => array(
+      'administer users'
+    ),
+    'file' => 'includes/acsauth.pages.inc',
+    'description' => 'Configure site for ACS signin.',
+    'type' => MENU_NORMAL_ITEM
+  );
+  $items['user/%user/acsauth'] = array(
+    'title' => t('ACS settings'),
+    'page callback' => 'acsauth_user_form',
+    'page arguments' => array(
+      1
+    ),
+    'access callback' => 'user_edit_access',
+    'access arguments' => array(
+      1
+    ),
+    'file' => 'includes/acsauth.pages.inc'
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function acsauth_theme() {
+  return array(
+    'acsauth_user_info' => array(
+      'variables' => array(
+        'account' => NULL
+      ),
+      'file' => 'includes/acsauth.pages.inc'
+    )
+  );
+}
+
+/**
+ * Load an ACS ID given a Drupal User ID.
+ */
+function acsauth_acsid_load($uid = NULL) {
+  $uid = isset($uid) ? $uid : $GLOBALS['user']->uid;
+  $result = db_query("SELECT acsid FROM {acsauth_users} WHERE uid = :uid", array(
+    ':uid' => $uid
+  ));
+  $acsid = $result->fetchField();
+  return $acsid ? $acsid : FALSE;
+}
+
+/**
+ * Load a Drupal User ID given an ACS ID.
+ */
+function acsauth_uid_load($acsid) {
+  $result = db_query("SELECT uid FROM {acsauth_users} WHERE acsid = :acsid", array(
+    ':acsid' => $acsid
+  ));
+  $uid = $result->fetchField();
+  return $uid ? (int) $uid : FALSE;
+}
