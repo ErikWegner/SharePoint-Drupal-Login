@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function acsauth_schema() {
+  $schema['acsauth_users'] = array(
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0
+      ),
+      'acsid' => array(
+        'description' => 'The ACS user id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'big'
+      )
+    ),
+    'primary key' => array(
+      'acsid'
+    ),
+    'indexes' => array(
+      'uid_fbid' => array(
+        'uid',
+        'acsid'
+      )
+    )
+  );
+  return $schema;
+}
