@@ -1,0 +1,5 @@
+acsauth.settings:
+  title: 'ACS Authentication'
+  description: 'Setup Azure Access Control Service Authentication'
+  parent: user.admin_index
+  route_name: acsauth.settings

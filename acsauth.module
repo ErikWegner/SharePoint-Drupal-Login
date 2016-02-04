@@ -14,19 +14,6 @@ function acsauth_menu() {
     'file' => 'includes/acsauth.acsauth.inc',
     'type' => MENU_CALLBACK
   );
-  $items['admin/config/people/acsauth'] = array(
-    'title' => t('ACS Auth settings'),
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array(
-      'acsauth_settings_form'
-    ),
-    'access arguments' => array(
-      'administer users'
-    ),
-    'file' => 'includes/acsauth.pages.inc',
-    'description' => 'Configure site for ACS signin.',
-    'type' => MENU_NORMAL_ITEM
-  );
   $items['user/%user/acsauth'] = array(
     'title' => t('ACS settings'),
     'page callback' => 'acsauth_user_form',

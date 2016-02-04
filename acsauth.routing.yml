@@ -1,0 +1,7 @@
+acsauth.settings:
+  path: 'admin/config/people/acsauth'
+  defaults:
+    _form: '\Drupal\acsauth\Form\SettingsForm'
+    _title: 'ACS Authentication'
+  requirements:
+    _permission: 'administer site configuration'

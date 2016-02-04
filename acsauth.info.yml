@@ -1,0 +1,7 @@
+name: Azure Access Control Service Authentication
+description: Allow users to connect with SharePoint Online and query information.
+package: Custom
+type: module
+version: 1.0
+core: 8.x
+configure: acsauth.settings
