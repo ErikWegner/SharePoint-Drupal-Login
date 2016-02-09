@@ -5,3 +5,10 @@ acsauth.settings:
     _title: 'ACS Authentication'
   requirements:
     _permission: 'administer site configuration'
+acsauth.acsauth:
+  path: 'acsauth/{action}'
+  defaults:
+    _controller: '\Drupal\acsauth\Controller\AuthenticationController::content'
+    _title: 'ACS Authentication Handler'
+  requirements:
+    _access: 'TRUE'

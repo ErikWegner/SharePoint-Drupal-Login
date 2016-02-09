@@ -1,0 +1,7 @@
+services:
+  logger.channel.acsauth:
+    parent: logger.channel_base
+    arguments: ['acsauth']
+  authenticationcontroller_logging:
+    class: Drupal\acsauth\Controller\AuthenticationController
+    arguments: ['@logger.channel.acsauth']
